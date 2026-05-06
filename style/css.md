@@ -24,11 +24,12 @@ box-sizing: border-box;   /* IE盒模型 */
 ```
 
 2. 如何让一个行内元素水平居中？
-答： 设置 text-align: center 给父元素。
-示例：
+答： 设置 `text-align: center` 给父元素。
+```html
 <div style="text-align: center;">
   <span>我是行内元素</span>
 </div>
+```
 
 4. 清除浮动的方法有哪些？
 答：
@@ -36,11 +37,13 @@ box-sizing: border-box;   /* IE盒模型 */
 * 设置父元素 overflow: hidden
 * 添加空元素 clear: both
 clearfix 示例：
+```css
 .clearfix::after {
   content: "";
   display: block;
   clear: both;
 }
+```
 
 5. display: none 与 visibility: hidden 区别？
 答：
@@ -49,7 +52,7 @@ clearfix 示例：
 
 6. 绝对定位的元素是相对于谁定位的？
 答： 相对于最近的“已定位”祖先元素（即设置了 position: relative/absolute/fixed 的祖先）。如果没有，则相对 body。
-示例：
+```css
 .parent {
   position: relative;
 }
@@ -58,8 +61,9 @@ clearfix 示例：
   top: 0;
   left: 0;
 }
+```
 
-7. 如何让两个 div 左右排列？
+6. 如何让两个 div 左右排列？
 答：
 * 使用 float：老方法
 * 使用 flex：推荐
