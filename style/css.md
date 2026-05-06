@@ -73,7 +73,8 @@ Flex 示例：
 ``` 
 
 8. 什么是 BFC？它的作用？  
-BFC（块级格式化上下文）是一个独立的布局环境。创建 BFC 可防止元素被浮动遮挡、清除 margin 合并等。  
+BFC（Block Formatting Context：块级格式化上下文）是一个独立的布局环境。  
+作用：清除浮动，防止父元素高度塌陷；阻止相邻元素的垂直外边距（margin）重叠；防止元素被浮动元素覆盖。  
 触发 BFC 方法：
 ```css
 overflow: hidden;
