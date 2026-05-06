@@ -72,11 +72,13 @@ Flex 示例：
 }
 ```
 
-8. 什么是 BFC？它的作用？
-BFC（块级格式化上下文）是一个独立的布局环境。创建 BFC 可防止元素被浮动遮挡、清除 margin 合并等。
+8. 什么是 BFC？它的作用？  
+BFC（块级格式化上下文）是一个独立的布局环境。创建 BFC 可防止元素被浮动遮挡、清除 margin 合并等。  
 触发 BFC 方法：
+```css
 overflow: hidden;
 display: flow-root;
+```
 
 9. em 与 rem 的区别？  
 * em：相对于父元素的字体大小
