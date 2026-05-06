@@ -35,7 +35,7 @@ box-sizing: border-box;   /* IE盒模型 */
 答：
 * 使用 clearfix（推荐）
 * 设置父元素 overflow: hidden
-* 添加空元素 clear: both
+* 添加空元素 clear: both  
 clearfix 示例：
 ```css
 .clearfix::after {
