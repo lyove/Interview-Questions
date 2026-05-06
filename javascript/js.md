@@ -1,6 +1,4 @@
-前端-js
-
-前端面试：js基础部分
+# JavaScript
 
 0、ES6新特性
 * Let  const 
@@ -52,6 +50,7 @@ Symbol
 闭包的"坑"
 
 1、经典陷阱：循环中的闭包
+```js
 // ❌ 错误：全部输出 3
 for (var i = 0; i < 3; i++) {
   setTimeout(() => console.log(i), 100)
@@ -66,6 +65,7 @@ for (var i = 0; i < 3; i++) {
     setTimeout(() => console.log(j), 100)
   })(i)
 }
+```
 2、内存泄漏风险
 解决：闭包中只引用必要变量，或及时释放引用
 
@@ -78,6 +78,7 @@ javaScript for...of 是 ES6 引入的循环语法，用于直接遍历可迭�
  1 :  async/await 
  2：Promise.then()链
  3：用for...of循环
+```js
     // 模拟一个异步任务（比如接口请求、文件读取）
     function delay(ms) {
         return new Promise(resolve => {
@@ -103,6 +104,7 @@ javaScript for...of 是 ES6 引入的循环语法，用于直接遍历可迭�
     
     // 调用
     asyncLoop();
+```
  4：reduce构建Promise链
 
 
@@ -120,44 +122,59 @@ javaScript for...of 是 ES6 引入的循环语法，用于直接遍历可迭�
 
 二、伪数组常见的例子：
 1、函数的arguments对象，2、document.querySelectorAll()返回的NodeList对象，3、字符串 String（也是伪数组）
-     1. arguments 
+     1. arguments
+```js
        function test() { 
           console.log(arguments); // 伪数组
-       } 
-     2. DOM 集合 
+       }
+```
+     2. DOM 集合
+```js
        const divs = document.getElementsByTagName('div'); 
-       console.log(divs); // HTMLCollection 伪数组 
+       console.log(divs); // HTMLCollection 伪数组
+```
      3. 字符串 
+```js
        const str = 'hello'; console.log(str[0]); // 'h'
+```
 
 三、判断方法：
+```js
 console.log(Array.isArray(fakeArr)); // false 
 console.log(fakeArr instanceof Array); // false
+```
 // 手写一个伪数组：这就是一个标准伪数组 
+```js
 const fakeArray = { 
     0: '张三', 
     1: '李四', 
     2: '王五', 
     length: 3 // 必须有 
 };
+```
 
 四、如何处理伪数组？
 ‌转换为真正的数组‌：使用Array.from()、扩展运算符(...)或者Array.prototype.slice.call()方法。
+```js
 const trueArray = Array. from(fakeArr);
 const trueArray2 = [...fakeArr];
 const trueArray3 = Array.prototype.slice.call(fakeArr);
+```
 
 五、使用循环
 可以使用如for或forEach循环
+```js
 for (let i = 0; i < items.length; i++) {
     console.log(items[i]);
 }
+```
 
 ----------------------
 
 5. 数组去重复：
 1、const newer = […new Set(arr)]
 2、indexOf /includes 遍历去重
+```js
     function unique(arr) {
         let res = []
         for (let i = 0; i < arr.length; i++) {
@@ -169,10 +186,13 @@ for (let i = 0; i < items.length; i++) {
         }
         return res
     }
+```
 3、对象数组去重
+```js
 	const uniqueById = arr.filter((item, index, self) => 
  		 index === self.findIndex(t => t.id === item.id)
 	);
+```
 
 ----------------------
 
@@ -283,7 +303,7 @@ JS 数据分为两类，拷贝的区别就出在这里：
   常用浅拷贝方法
 1. 对象：Object.assign()、扩展运算符 {...obj}
 2. 数组：Array.prototype.slice()、concat()、扩展运算符 [...arr]
-                   数组array.slice():array.slice(start, end)提取数组的一部分，返回一个新数组
+   数组array.slice():array.slice(start, end)提取数组的一部分，返回一个新数组
 
   常用深拷贝方法
 1. 简易版：JSON.parse(JSON.stringify(obj))，不支持：函数、Symbol、undefined、循环引用、Date（会转成字符串）
@@ -317,11 +337,13 @@ document.cookie = "username=张三; max-age=86400; path=/";
 // max-age=86400 = 1天（单位：秒）
 
 2. 获取 Cookie (所有cookie)
-// 获取到的是字符串，格式："username=张三; age=20" 
+// 获取到的是字符串，格式："username=张三; age=20"
+```js
 const allCookies = document.cookie; 
 console.log(allCookies);
+```
 
-3. 修改 Cookie
+4. 修改 Cookie
 直接覆盖同名cookie即可
 
 4、删除 Cookies：
@@ -342,7 +364,9 @@ console.log(allCookies);
 
 10. 防抖、节流 
 防抖: 连续触发只执行最后一次；
-场景：搜索框输入/窗口调整/按钮多次提交/滚动事件。 function debounce(fn, delay) {
+场景：搜索框输入/窗口调整/按钮多次提交/滚动事件。
+```js
+function debounce(fn, delay) {
   // 用来保存定时器 ID
   let timer = null;
   // 返回一个新函数（闭包）
@@ -353,9 +377,11 @@ console.log(allCookies);
     timer = setTimeout(() => fn.apply(this, args), delay);
   };
 }
- 节流throttle(/ˈθrɑːtl/): 每隔一段时间执行一次,固定的时间间隔内,无论件触发多少次,函数最多只执行一次；
-场景：滚动事件监听(如懒加载、下拉加载)/鼠标移动(mousemove)；
+```
 
+节流throttle(/ˈθrɑːtl/): 每隔一段时间执行一次,固定的时间间隔内,无论件触发多少次,函数最多只执行一次；
+场景：滚动事件监听(如懒加载、下拉加载)/鼠标移动(mousemove)；
+```js
 function throttle(fn, delay) { 
     // 记录上一次执行的时间戳 
     let lastTime = 0; 
@@ -372,3 +398,4 @@ function throttle(fn, delay) {
         } 
     }; 
 }
+```
