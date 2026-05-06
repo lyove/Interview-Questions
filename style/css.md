@@ -78,7 +78,7 @@ BFC（Block Formatting Context：块级格式化上下文）是一个独立的�
 触发 BFC 方法：
 ```css
 overflow: hidden;
-display: flow-root;
+display: flow-root;// 这是现代 CSS 中最推荐的方式，因为它专门为创建 BFC 而设计，副作用最小
 ```
 
 9. em 与 rem 的区别？  
