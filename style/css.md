@@ -70,9 +70,9 @@ Flex 示例：
   display: flex;
   justify-content: space-between;
 }
-```
+``` 
 
-8. 什么是 BFC？它的作用？  
+8. 什么是 BFC？它的作用？  
 BFC（块级格式化上下文）是一个独立的布局环境。创建 BFC 可防止元素被浮动遮挡、清除 margin 合并等。  
 触发 BFC 方法：
 ```css
