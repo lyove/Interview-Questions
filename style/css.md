@@ -1,7 +1,7 @@
 前端-css
 
-1. 盒模型（Box Model）是什么？
-答： CSS 中每个元素都由以下部分组成：
+1. 盒模型（Box Model）是什么？  
+CSS 中每个元素都由以下部分组成：  
 * content：内容区域
 * padding：内边距
 * border：边框
@@ -15,7 +15,7 @@ box-sizing: border-box;   /* IE盒模型 */
 ```
 
 2. 如何水平居中一个块级元素？
-答： 设置 margin: 0 auto 并指定 width。
+设置 margin: 0 auto 并指定 width。  
 ```css
 .center {
   width: 300px;
@@ -24,7 +24,7 @@ box-sizing: border-box;   /* IE盒模型 */
 ```
 
 2. 如何让一个行内元素水平居中？
-答： 设置 `text-align: center` 给父元素。
+设置 `text-align: center` 给父元素。  
 ```html
 <div style="text-align: center;">
   <span>我是行内元素</span>
@@ -32,7 +32,6 @@ box-sizing: border-box;   /* IE盒模型 */
 ```
 
 4. 清除浮动的方法有哪些？
-答：
 * 使用 clearfix（推荐）
 * 设置父元素 overflow: hidden
 * 添加空元素 clear: both  
@@ -46,12 +45,11 @@ clearfix 示例：
 ```
 
 5. display: none 与 visibility: hidden 区别？
-答：
 * display: none：元素从文档流中移除，不占空间
 * visibility: hidden：元素不可见，但仍占据空间
 
-6. 绝对定位的元素是相对于谁定位的？
-答： 相对于最近的“已定位”祖先元素（即设置了 position: relative/absolute/fixed 的祖先）。如果没有，则相对 body。
+6. 绝对定位的元素是相对于谁定位的？  
+相对于最近的“已定位”祖先元素（即设置了 position: relative/absolute/fixed 的祖先）。如果没有，则相对 body。
 ```css
 .parent {
   position: relative;
@@ -63,57 +61,58 @@ clearfix 示例：
 }
 ```
 
-6. 如何让两个 div 左右排列？
-答：
-* 使用 float：老方法
-* 使用 flex：推荐
+6. 如何让两个 div 左右排列？ 
+* 使用 float：老方法 
+* 使用 flex：推荐 
 Flex 示例：
+```css
 .container {
   display: flex;
   justify-content: space-between;
 }
+```
 
 8. 什么是 BFC？它的作用？
-答： BFC（块级格式化上下文）是一个独立的布局环境。创建 BFC 可防止元素被浮动遮挡、清除 margin 合并等。
+BFC（块级格式化上下文）是一个独立的布局环境。创建 BFC 可防止元素被浮动遮挡、清除 margin 合并等。
 触发 BFC 方法：
 overflow: hidden;
 display: flow-root;
 
-9. em 与 rem 的区别？
-答：
+9. em 与 rem 的区别？  
 * em：相对于父元素的字体大小
 * rem：相对于根元素 html 的字体大小
 
-10. 如何设置一个 div 的宽高比为 16:9？
-答： 使用 padding-top 百分比的技巧：
+10. 如何设置一个 div 的宽高比为 16:9？ 
+使用 padding-top 百分比的技巧：
+```css
 .aspect-ratio {
   position: relative;
   width: 100%;
   padding-top: 56.25%; /* 9 / 16 = 0.5625 */
 }
+```
 
-11. 如何实现文本溢出显示省略号？
-答：
+12. 如何实现文本溢出显示省略号？  
+```css
 overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
+```
 
-12. z-index 的使用注意点？
-答：
+12. z-index 的使用注意点？  
 * 只对 position 不为 static 的元素有效
 * 数值越大越靠上
 
-13. 如何禁用用户选择文字？
-答：
+13. 如何禁用用户选择文字？  
 user-select: none;
 
-14. Flex 容器的主轴、交叉轴是怎么定义的？
-答：
+14. Flex 容器的主轴、交叉轴是怎么定义的？  
 * flex-direction: row：主轴为水平方向，交叉轴为垂直
 * flex-direction: column：主轴为垂直，交叉轴为水平
 
-15. 如何使用 CSS 画一个三角形？
-答： 使用透明边框技巧：
+15. 如何使用 CSS 画一个三角形？  
+使用透明边框技巧：
+```css
 .triangle {
   width: 0;
   height: 0;
@@ -121,36 +120,39 @@ user-select: none;
   border-right: 50px solid transparent;
   border-bottom: 50px solid red;
 }
+```
 
-16. 伪类与伪元素的区别？
-答：
+17. 伪类与伪元素的区别？
 * 伪类（:hover、:nth-child()）：表示某种状态
 * 伪元素（::before、::after）：表示虚拟的 DOM 节点
 
 17. 如何给元素添加多个背景图？
-答：
+```css
 background-image: url(img1.jpg), url(img2.jpg);
+```
 
-18. 动画和过渡的区别？
-答：
+18. 动画和过渡的区别？  
 * transition：用于状态变化（如 hover）
 * animation：可实现更复杂的关键帧动画，具有完整时间轴
 
 19. 如何让一个元素垂直水平居中？
-答（Flex 方式）：
+（Flex 方式）：
+```css
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+```
 
-20. 如何使用媒体查询实现响应式布局？
-答：
+21. 如何使用媒体查询实现响应式布局？
+```css
 @media screen and (max-width: 600px) {
   body {
     background: lightblue;
   }
 }
+```
 
 21.请解释Flex布局的基本概念和主要属性
 容器属性：
