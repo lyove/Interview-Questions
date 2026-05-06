@@ -6,20 +6,24 @@
 * padding：内边距
 * border：边框
 * margin：外边距
-标准盒模型：width 只包含 content IE盒模型：width 包含 content + padding + border
-设置方式：
+标准盒模型：width 只包含 content
+IE盒模型：width 包含 content + padding + border
+**设置方式：**
+```css
 box-sizing: content-box;  /* 标准盒模型 */
 box-sizing: border-box;   /* IE盒模型 */
+```
 
 2. 如何水平居中一个块级元素？
 答： 设置 margin: 0 auto 并指定 width。
-示例：
+```css
 .center {
   width: 300px;
   margin: 0 auto;
 }
+```
 
-3. 如何让一个行内元素水平居中？
+2. 如何让一个行内元素水平居中？
 答： 设置 text-align: center 给父元素。
 示例：
 <div style="text-align: center;">
