@@ -1,6 +1,6 @@
 # JavaScript
 
-0、ES6新特性
+## 一、ES6新特性
 * Let  const 
 * 箭头函数
 * 解构赋值
@@ -16,40 +16,44 @@
 * Symbol：唯一值，避免属性冲突
 * async/await
 
-扩展解释
-Set
+### 扩展解释
+**Set** 
 * 有序、无重复值的列表
 * 用于：数组去重、判断存在
 * add、has、delete、size
 
-Map
+**Map**  
 * 键值对，键可以是任意类型
 * 比对象更强大
 * set、get、has、delete、size
 
-for...of
+**for...of**  
+javaScript for...of 是 ES6 引入的循环语法，用于直接遍历可迭代对象（如数组、字符串、Map、Set 等）的元素值。  
 * 统一遍历语法
 * 遍历数组、字符串、Set、Map，（不能遍历Object，因为普通对象不是可迭代的）
-* 最简洁、最安全
+* 最简洁、最安全  
+‌语法结构‌：`for (const item of list) { // 代码块 }`   
+不能遍历Object，因为普通对象不是可迭代的。
 
-Symbol
+**Symbol**  
 * 独一无二的值（永远不会重复）
 * 用作对象唯一键
 * 避免属性冲突、保护私有属性
 
+----------------------
 
-1、什么是闭包，以及如何/为什么使用闭包？
-函数 + 函数外部可访问的变量 = 闭包
+## 二、什么是闭包，以及如何/为什么使用闭包？
+函数 + 函数外部可访问的变量 = 闭包 
 
-为什么使用闭包？
-1）数据私有化（模拟私有变量）
-2） 函数柯里化 / 偏函数
+### 为什么使用闭包？
+1. 数据私有化（模拟私有变量）
+2. 函数柯里化 / 偏函数
 3. 事件处理 / 回调中保留上下文
 4. 防抖 / 节流
 
-闭包的"坑"
+### 闭包的"坑"
 
-1、经典陷阱：循环中的闭包
+1. 经典陷阱：循环中的闭包
 ```js
 // ❌ 错误：全部输出 3
 for (var i = 0; i < 3; i++) {
@@ -66,18 +70,15 @@ for (var i = 0; i < 3; i++) {
   })(i)
 }
 ```
-2、内存泄漏风险
+2. 内存泄漏风险
 解决：闭包中只引用必要变量，或及时释放引用
 
-2.  for of 循环 
-javaScript for...of 是 ES6 引入的循环语法，用于直接遍历可迭代对象（如数组、字符串、Map、Set 等）的元素值。
-‌语法结构‌：for (const item of list) { // 代码块 }
-不能遍历Object，因为普通对象不是可迭代的
+----------------------
 
-3. 使异步函数按照顺序执行的方法有哪些？
- 1 :  async/await 
- 2：Promise.then()链
- 3：用for...of循环
+## 三、使异步函数按照顺序执行的方法有哪些？  
+ 1. async/await 
+ 2. Promise.then()链
+ 3. 用for...of循环
 ```js
     // 模拟一个异步任务（比如接口请求、文件读取）
     function delay(ms) {
@@ -110,35 +111,35 @@ javaScript for...of 是 ES6 引入的循环语法，用于直接遍历可迭�
 
 ----------------------
 
-4. 伪数组:
-一、什么是伪数组？
+## 四、伪数组:
+1. 什么是伪数组？
 长得像数组，有length 属性，也可以通过下标 [index] 访问元素，但不能使用数组的原生方法（如 push、pop、forEach、map 等）。
 
 伪数组的 3 个核心特征
-1. 有 length 属性
-2. 可以通过数字下标访问元素
-3. 不是 Array 实例，但不能使用数组的原生方法（如 push、pop、forEach、map 等）
-4. （补充）length 不会随元素增减自动变化
+  1. 有 length 属性
+  2. 可以通过数字下标访问元素
+  3. 不是 Array 实例，但不能使用数组的原生方法（如 push、pop、forEach、map 等）
+  4. （补充）length 不会随元素增减自动变化
 
-二、伪数组常见的例子：
-1、函数的arguments对象，2、document.querySelectorAll()返回的NodeList对象，3、字符串 String（也是伪数组）
-     1. arguments
+2. 伪数组常见的例子：
+  - 函数的arguments对象，2、document.querySelectorAll()返回的NodeList对象，3、字符串 String（也是伪数组）
+arguments
 ```js
-       function test() { 
-          console.log(arguments); // 伪数组
-       }
+function test() { 
+    console.log(arguments); // 伪数组
+}
 ```
-     2. DOM 集合
+  -  DOM 集合
 ```js
-       const divs = document.getElementsByTagName('div'); 
-       console.log(divs); // HTMLCollection 伪数组
+const divs = document.getElementsByTagName('div'); 
+console.log(divs); // HTMLCollection 伪数组
 ```
-     3. 字符串 
+  - 字符串 
 ```js
-       const str = 'hello'; console.log(str[0]); // 'h'
+const str = 'hello'; console.log(str[0]); // 'h'
 ```
 
-三、判断方法：
+3. 判断方法：
 ```js
 console.log(Array.isArray(fakeArr)); // false 
 console.log(fakeArr instanceof Array); // false
@@ -153,7 +154,7 @@ const fakeArray = {
 };
 ```
 
-四、如何处理伪数组？
+4. 如何处理伪数组？
 ‌转换为真正的数组‌：使用Array.from()、扩展运算符(...)或者Array.prototype.slice.call()方法。
 ```js
 const trueArray = Array. from(fakeArr);
@@ -161,7 +162,7 @@ const trueArray2 = [...fakeArr];
 const trueArray3 = Array.prototype.slice.call(fakeArr);
 ```
 
-五、使用循环
+5. 使用循环
 可以使用如for或forEach循环
 ```js
 for (let i = 0; i < items.length; i++) {
@@ -171,7 +172,7 @@ for (let i = 0; i < items.length; i++) {
 
 ----------------------
 
-5. 数组去重复：
+## 五、数组去重复：
 1、const newer = […new Set(arr)]
 2、indexOf /includes 遍历去重
 ```js
@@ -196,7 +197,7 @@ for (let i = 0; i < items.length; i++) {
 
 ----------------------
 
-6. http协议：
+## 六、http协议：
 基本概念：HTTP 协议（Hypertext Transfer Protocol，超文本传输协议），应用层协议，是一种规定怎么发请求、怎么回响应、格式长什么样、用什么方法（GET/POST）、状态码怎么约定的协议。
 请求包含：
 * 请求行：方法 路径 协议版本
@@ -228,8 +229,7 @@ HTTP/3(QUIC)：基于 UDP，前端不用改业务代码，只需要服务器、C
 
 ----------------------
 
-
-7、性能优化
+## 七、性能优化
 
 简易方案：
 *  减少HTTP请求数（合并资源、雪碧图、HTTP/2）
@@ -291,7 +291,7 @@ HTTP/3(QUIC)：基于 UDP，前端不用改业务代码，只需要服务器、C
 
 ----------------------
 
-8. 深拷贝与浅拷贝
+## 八、深拷贝与浅拷贝
 
 JS 数据分为两类，拷贝的区别就出在这里：
 
@@ -313,48 +313,51 @@ JS 数据分为两类，拷贝的区别就出在这里：
 
 ----------------------
 
-9. 跨域：
+## 九、跨域：
 1. 什么是跨域
-      浏览器前端AJAX/fetch 请求时候，协议、域名、端口只要有一个不同，就是跨域。
-      同源策略目的：防止恶意网站窃取数据/防止CSRF(跨站请求伪造)攻击/保护用户隐私和安全。
+    浏览器前端AJAX/fetch 请求时候，协议、域名、端口只要有一个不同，就是跨域。  
+    同源策略目的：防止恶意网站窃取数据/防止CSRF(跨站请求伪造)攻击/保护用户隐私和安全。
 
 2. 解决跨域：
-      1）.CORS跨域解决方案（后端常用）。在服务器端设置响应头，告诉浏览器允许哪些来源的请求,
-          Access-Control-Allow-Origin: 允许的域名 / * 
-          Access-Control-Allow-Methods: GET,POST,PUT,DELETE 
-          Access-Control-Allow-Headers: 自定义请求头
-      2）. 代理服务器（Proxy）
-      3）. JSONP（JSON with Padding）—— 仅限 GET:一种老旧的跨域解决方案，利用 <script> 标签不受跨域限制的特性
-      4）. WebSocket：const socket = new WebSocket('ws://localhost:8080');
-      5）. postMessage（页面 /iframe 通信）
+    1）.CORS跨域解决方案（后端常用）。在服务器端设置响应头，告诉浏览器允许哪些来源的请求,
+        Access-Control-Allow-Origin: 允许的域名 / * 
+        Access-Control-Allow-Methods: GET,POST,PUT,DELETE 
+        Access-Control-Allow-Headers: 自定义请求头
+    2）. 代理服务器（Proxy）
+    3）. JSONP（JSON with Padding）—— 仅限 GET:一种老旧的跨域解决方案，利用 <script> 标签不受跨域限制的特性
+    4）. WebSocket：const socket = new WebSocket('ws://localhost:8080');
+    5）. postMessage（页面 /iframe 通信）
 
 ----------------------
 
-10. Cookies
+## 十、Cookies
 1. 设置 Cookie
+```js
 // 基础格式：document.cookie = "键=值; 过期时间; 路径;" 
 document.cookie = "username=张三; max-age=86400; path=/"; 
 // max-age=86400 = 1天（单位：秒）
+```
 
 2. 获取 Cookie (所有cookie)
-// 获取到的是字符串，格式："username=张三; age=20"
 ```js
+// 获取到的是字符串，格式："username=张三; age=20"
 const allCookies = document.cookie; 
 console.log(allCookies);
 ```
 
-4. 修改 Cookie
+3. 修改 Cookie
 直接覆盖同名cookie即可
 
-4、删除 Cookies：
+4. 删除 Cookies：
 只能通过设置过期时间为过去来“删除”：把 max-age 设为 0 或负数
 
 ----------------------
 
-11. localStorage、sessionStorage
+## 十一、localStorage、sessionStorage
 * localStorage：持久化存储｜同源共享｜手动删才没；
 * sessionStorage：会话级存储｜仅在同一个浏览器标签页内有效｜窗口或标签页关闭就清空；
-    两个存储的用法完全相同，只有生命周期不同！
+
+两个存储的用法完全相同，只有生命周期不同！
 * storage.setItem('key', 'value');
 * const value = storage.getItem('key');
 * storage.removeItem('key');
@@ -362,9 +365,10 @@ console.log(allCookies);
 
 ----------------------
 
-10. 防抖、节流 
-防抖: 连续触发只执行最后一次；
-场景：搜索框输入/窗口调整/按钮多次提交/滚动事件。
+## 十二、防抖、节流
+### 防抖 
+连续触发只执行最后一次；  
+**场景**：搜索框输入/窗口调整/按钮多次提交/滚动事件。
 ```js
 function debounce(fn, delay) {
   // 用来保存定时器 ID
@@ -379,8 +383,9 @@ function debounce(fn, delay) {
 }
 ```
 
-节流throttle(/ˈθrɑːtl/): 每隔一段时间执行一次,固定的时间间隔内,无论件触发多少次,函数最多只执行一次；
-场景：滚动事件监听(如懒加载、下拉加载)/鼠标移动(mousemove)；
+### 节流throttle(/ˈθrɑːtl/):
+每隔一段时间执行一次,固定的时间间隔内,无论件触发多少次,函数最多只执行一次；  
+**场景**：滚动事件监听(如懒加载、下拉加载)/鼠标移动(mousemove)；
 ```js
 function throttle(fn, delay) { 
     // 记录上一次执行的时间戳 
