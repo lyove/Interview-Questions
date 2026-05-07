@@ -242,11 +242,11 @@ const server = http.createServer((req, res) => {
 
 ### 3、Egg.js 框架
 
-Egg.js 没有内置 CORS 插件，需要安装官方插件：
-1）. 安装插件 
+Egg.js 没有内置 CORS 插件，需要安装官方插件：  
+1. 安装插件 
 `npm install egg-cors --save`
 
-2）. 启用插件
+2. 启用插件
 ```js
 // config/plugin.js
 exports.cors = {
@@ -255,7 +255,7 @@ exports.cors = {
 };
 ```
 
-3）. 配置跨域规则
+3. 配置跨域规则
 ```js
 // config/config.default.js
 exports.cors = {
@@ -276,7 +276,7 @@ exports.cors = {
 };
 ```
 
-4）. 环境差异化配、
+4. 环境差异化配、
 ```js
 // config/config.local.js（本地开发）
 exports.cors = {
@@ -295,26 +295,26 @@ exports.cors = {
 
 ## 六、Node.js 中间件是什么？有哪些用途？
 
-Node.js 中间件（Middleware）是一种函数机制，用于在 HTTP 请求到达路由处理程序之前（或响应发送给客户端之前），对请求和响应对象进行加工、拦截或执行某些通用逻辑。基本上是任何不属于业务逻辑的部分。
-一句话：中间件 = 可复用的请求/响应拦截器
+Node.js 中间件（Middleware）是一种函数机制，用于在 HTTP 请求到达路由处理程序之前（或响应发送给客户端之前），对请求和响应对象进行加工、拦截或执行某些通用逻辑。基本上是任何不属于业务逻辑的部分。  
+一句话：**中间件 = 可复用的请求/响应拦截器**
 
-用途：
-日志记录：记录每个请求的 URL、耗时
-身份验证：检查用户是否登录、Token 是否有效
-数据解析：解析 JSON 请求体、表单数据
-错误处理：统一捕获和处理异常
-CORS 跨域：设置跨域响应头
-静态文件服务
+### 用途：
+1. 日志记录：记录每个请求的 URL、耗时
+2. 身份验证：检查用户是否登录、Token 是否有效
+3. 数据解析：解析 JSON 请求体、表单数据
+4. 错误处理：统一捕获和处理异常
+5. CORS 跨域：设置跨域响应头
+6. 静态文件服务
 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ## 七、Node.js的异步问题
 
-1、 回调地狱（Callback Hell）
+1. 回调地狱（Callback Hell）
 嵌套层级深、代码横向膨胀，逻辑难以跟踪：
 
-2、错误处理繁琐
+2. 错误处理繁琐
 每个回调都要手动检查 err，容易遗漏，且没有统一的异常捕获机制（try/catch 对异步回调无效）
 
 3. 控制流复杂
@@ -323,13 +323,12 @@ CORS 跨域：设置跨域响应头
 4. 代码复用困难
 回调的签名不统一，中间结果传递靠闭包，模块化程度低。
 
-解决方案
-方案	说明
-Promise	ES6 标准，链式调用，统一错误处理（.catch()）
-async/await	ES2017，基于 Promise 的语法糖，写同步风格的异步代码
-util.promisify	Node.js 内置，将 callback API 包装为 Promise
-fs/promises 等	Node.js 官方已提供 Promise 版本的 API
-const fs = require('fs').promises;
+### 解决方案
+方案 | 说明
+Promise	ES6 标准，| 链式调用，统一错误处理（.catch()）
+async/await	ES2017， | 基于 Promise 的语法糖，写同步风格的异步代码
+util.promisify |	Node.js 内置，将 callback API 包装为 Promise
+fs/promises 等 |	Node.js 官方已提供 Promise 版本的 API，`const fs = require('fs').promises;`
 
 async function main() {
   try {
@@ -343,3 +342,4 @@ async function main() {
 }
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
