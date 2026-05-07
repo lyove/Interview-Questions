@@ -104,13 +104,14 @@ const myEmitter = new EventEmitter();
 ```
 
 3. ‌注册监听器‌
-on(event, listener)：持续监听事件。
-once(event, listener)：仅触发一次后自动移除。
+`on(event, listener)`：持续监听事件。
+`once(event, listener)`：仅触发一次后自动移除。
 ```javascript
+// 持续监听
 myEmitter.on('greet', (name) => {
   console.log(`Hello, ${name}!`);
 });
-
+// 仅触发一次后自动移除
 myEmitter.once('init', () => {
   console.log('Initialized once.');
 });
