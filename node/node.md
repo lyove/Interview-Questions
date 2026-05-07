@@ -98,13 +98,13 @@ Node.js 的 ‌EventEmitter‌ 是内置模块 events 提供的核心类，用�
 const EventEmitter = require('events');
 ```
 
-2. ‌创建实例‌
+2. ‌创建实例‌. 
 ```javascript
 const myEmitter = new EventEmitter();
 ```
 
-3. ‌注册监听器‌
-`on(event, listener)`：持续监听事件。
+3. ‌注册监听器‌  
+`on(event, listener)`：持续监听事件。  
 `once(event, listener)`：仅触发一次后自动移除。
 ```javascript
 // 持续监听
