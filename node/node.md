@@ -80,11 +80,11 @@ Node.js 的 JavaScript 代码运行在单个主线程上。当遇到耗时的 I/
 4. 从事件循环的某个阶段取出一个宏任务执行。
 5. 重复步骤 2 和 3。
 6. 进入下一个事件循环阶段，重复步骤 4。
+
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ## 二、异步与事件循环
 ### ‌事件循环（Event Loop）执行顺序‌
-
 - I/O 事件回调
 - setImmediate()
 - 定时器（setTimeout/setInterval）
@@ -98,7 +98,7 @@ Node.js 的 JavaScript 代码运行在单个主线程上。当遇到耗时的 I/
 setImmediate(() => console.log('first'));
 process.nextTick(() => console.log('second'));
 console.log('third');
-// 输出：third → second → first ‌‌:ml-citation{ref="5,9" appearance="aggregated" data="citationList"}
+// 输出：third → second → first
 ```
 ### ‌异步控制方式演进‌
 
