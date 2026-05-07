@@ -170,7 +170,64 @@ process.on('unhandledRejection', (reason, promise) => {
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-## 四、如何在 Node.js 中创建一个返回 Hello World 的简单服务器？
+## 四、Node.js Stream
+Stream（流）是一种用于高效处理流式数据的抽象接口。它的核心思想是将数据分成小块（chunk）进行连续处理，而不是一次性将整个数据加载到内存中。
+**内存效率高**：Stream 通过分块处理，能始终保持很低的内存占用；  
+**时间效率高**：数据可以边接收边处理，无需等待所有数据准备就绪。这对于网络请求、实时数据处理等高并发场景至关重要，能够显著降低延迟。
+
+### Stream 的四种类型
+| 类型 | 描述 | 典型示例 |
+| :--- | :--- | :--- |
+| Readable | 用于读取数据<websource>source_group_web_6</websource>。 | `fs.createReadStream()` (读取文件) |
+| Writable | 用于写入数据<websource>source_group_web_7</websource>。 | `fs.createWriteStream()` (写入文件) |
+| Duplex | 双向流，既可读又可写<websource>source_group_web_8</websource>。 | `net.Socket` (TCP 连接) |
+| Transform | 转换流，在读写过程中可以修改或转换数据<websource>source_group_web_9</websource>。 | `zlib.createGzip()` (数据压缩) |<websource>source_group_web_10</websource>
+
+### 如何使用 Stream
+Stream 的使用主要依赖于事件和管道（pipe）机制。  
+1. 事件驱动
+Stream 是事件发射器（EventEmitter），通过监听事件来响应数据的变化。
+Readable 流：主要监听 data 事件（数据块到达时触发）和 end 事件（数据读取完毕时触发）。
+Writable 流：主要使用 write() 方法写入数据，并监听 finish 事件（所有数据写入完成）。
+2. 管道操作 (.pipe())
+.pipe() 方法是 Stream 的核心，它能将一个可读流的输出自动连接到另一个可写流的输入，形成一个高效的数据处理链。更重要的是，pipe 内置了背压（Backpressure）机制，当下游处理不过来时，会自动通知上游暂停发送数据，从而防止内存溢出。
+
+### 实际应用场景
+Stream 在处理大量数据的场景中表现尤为出色：
+1. 处理大文件：无论是读取一个巨大的 CSV 文件进行数据分析，还是将用户上传的视频文件保存到磁盘，使用 Stream 都可以避免内存爆炸。  
+```javascript
+const fs = require('fs');
+// 将大文件 input.txt 的内容复制到 output.txt
+fs.createReadStream('input.txt')
+  .pipe(fs.createWriteStream('output.txt'));
+```
+2. 网络请求与响应：在 Web 开发中，可以直接将 HTTP 请求的数据流式地写入文件，或者将一个文件流式地发送给客户端。  
+```javascript
+const https = require('https');
+const fs = require('fs');
+// 从网络下载文件并保存
+const file = fs.createWriteStream('data.txt');
+https.get('https://example.com/large-file.zip', (response) => {
+  response.pipe(file);
+});
+```
+
+3. 数据压缩与解压：利用 Transform 流，可以在数据传输过程中实时进行压缩或解压。 
+```javascript
+const fs = require('fs');
+const zlib = require('zlib');
+// 将文件压缩成 .gz 格式
+fs.createReadStream('input.txt')
+  .pipe(zlib.createGzip())
+  .pipe(fs.createWriteStream('input.txt.gz'));
+```
+
+4. 实时数据处理：处理来自传感器、金融市场或物联网设备的连续数据流时，Stream 可以实现高效的实时过滤、聚合和分析。
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+## 五、如何在 Node.js 中创建一个返回 Hello World 的简单服务器？
 ```js
 const http = require("http");
 http
@@ -192,7 +249,7 @@ server.listen(3000);
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-## 五、Node.js 如何处理CORS 跨域？
+## 六、Node.js 如何处理CORS 跨域？
 
 ### 1、原生 Node.js（不依赖框架） 
 
@@ -293,7 +350,7 @@ exports.cors = {
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-## 六、Node.js 中间件是什么？有哪些用途？
+## 七、Node.js 中间件是什么？有哪些用途？
 
 Node.js 中间件（Middleware）是一种函数机制，用于在 HTTP 请求到达路由处理程序之前（或响应发送给客户端之前），对请求和响应对象进行加工、拦截或执行某些通用逻辑。基本上是任何不属于业务逻辑的部分。  
 一句话：**中间件 = 可复用的请求/响应拦截器**
@@ -309,7 +366,7 @@ Node.js 中间件（Middleware）是一种函数机制，用于在 HTTP 请求�
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-## 七、Node.js的异步问题
+## 八、Node.js的异步问题
 
 1. 回调地狱（Callback Hell）
 嵌套层级深、代码横向膨胀，逻辑难以跟踪：
@@ -345,7 +402,7 @@ async function main() {
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-### 八、webSocket
+### 九、webSocket
 webSocket与传统的http有什么优势 ？  
 - 客户端与服务器只需要一个TCP连接，比http长轮询使用更少的连接
 - webSocket服务端可以推送数据到客户端
