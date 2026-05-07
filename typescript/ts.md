@@ -121,10 +121,101 @@ TypeScript 会根据赋值自动推断类型
 
 
 ## 六、类型守卫
-就是一种告诉 TypeScript “在这个 if 语句/函数内部，这个变量一定是某个特定类型” 的方式。
-是一种在运行时检查变量类型的技术，它允许你在特定代码块中缩小（narrow） 一个变量的类型
-`typeof`类型守卫、`instanceof`
+TypeScript 类型守卫（Type Guard）是一种在运行时检查值的类型，并据此在代码块内收窄（Narrow）类型范围的机制。与类型断言"强制告诉编译器"不同，类型守卫是让编译器根据逻辑自动推断出更精确的类型。
+示例：
+```ts
+function process(value: string | number) {
+  // 此时 value 是联合类型 string | number
+  value.toFixed(); // ❌ 报错：string 没有 toFixed
+  
+  if (typeof value === "number") {
+    // ✅ 在这个代码块内，value 被自动收窄为 number
+    value.toFixed(2);
+  } else {
+    // ✅ 这里 value 被推断为 string
+    value.toUpperCase();
+  }
+}
+```
+### 四种类型守卫方式
+1. typeof 类型守卫. 
+适用于基础类型（string、number、boolean、bigint、symbol、undefined、object、function）。
+```ts
+function printValue(value: string | number | boolean) {
+  if (typeof value === "string") {
+    console.log(value.toUpperCase()); // value: string
+  } else if (typeof value === "number") {
+    console.log(value.toFixed(2));    // value: number
+  } else {
+    console.log(value.valueOf());     // value: boolean
+  }
+}
+```
+⚠️ **typeof null === "object" 是 JavaScript 历史 bug，需额外注意**。
 
+
+2. instanceof 类型守卫
+适用于类（Class）的实例检查。
+```ts
+class Dog {
+  bark() { return "Woof!"; }
+}
+
+class Cat {
+  meow() { return "Meow!"; }
+}
+
+function makeSound(animal: Dog | Cat) {
+  if (animal instanceof Dog) {
+    console.log(animal.bark()); // animal: Dog
+  } else {
+    console.log(animal.meow()); // animal: Cat
+  }
+}
+```
+
+3. in 类型守卫
+通过检查**属性是否存在**来区分类型。  
+```ts
+type Circle = { kind: "circle"; radius: number };
+type Square = { kind: "square"; side: number };
+type Rectangle = { kind: "rect"; width: number; height: number };
+
+type Shape = Circle | Square | Rectangle;
+
+function getArea(shape: Shape) {
+  if ("radius" in shape) {
+    return Math.PI * shape.radius ** 2; // shape: Circle
+  } else if ("side" in shape) {
+    return shape.side ** 2;             // shape: Square
+  } else {
+    return shape.width * shape.height;  // shape: Rectangle
+  }
+}
+```
+💡 **比 typeof 更适合检查对象结构，但需注意属性名冲突。**
+
+4. 自定义类型守卫（最强大）
+使用 value is Type 谓词，让函数"返回一个类型判断"。  
+```ts
+// 定义类型守卫函数
+function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+
+function isNumber(value: unknown): value is number {
+  return typeof value === "number" && !isNaN(value);
+}
+
+// 使用
+function process(value: unknown) {
+  if (isString(value)) {
+    console.log(value.toUpperCase()); // ✅ value: string
+  } else if (isNumber(value)) {
+    console.log(value.toFixed(2));    // ✅ value: number
+  }
+}
+```
 
 ## 七、any和unknown的区别？
 `any`：绕过所有类型检查。
