@@ -1,14 +1,40 @@
-一、Node.js 工作机制
-核心特点
+## 一、Node.js 概念
+Node.js 是一个开源与跨平台的 JavaScript 运行时环境。 
+在浏览器外运行 V8 JavaScript 引擎（Google Chrome 的内核），利用事件驱动、非阻塞和异步I/O模型等技术提高性能。 
+我们可以理解为：Node.js 就是一个服务器端的、非阻塞式I/O的、事件驱动的JavaScript运行环境。 
+
+**核心特点**
 * 单线程：Node.js 使用单线程处理请求
 * 事件循环：通过事件驱动机制处理并发
-* 非阻塞 I/O：I/O 操作不会阻塞主线程
+* 非阻塞I/O：I/O 操作不会阻塞主线程
 * 跨平台：可以在 Windows、Linux、macOS 等系统上运行
+
+**Node.js 适用场景？**
+- 实时应用（如聊天、推送）
+- 高并发 I/O 密集型服务（如 API 网关、代理服务器）
+- 前端构建工具（Webpack、Vite）
+- ‌不适合 CPU 密集型任务‌（因单线程特性）‌‌
+
+**如何判断运行环境是浏览器还是 Node.js？**
+```js
+// 判断浏览器环境
+if (typeof window !== 'undefined' && typeof window.document !== 'undefined') {
+  console.log('是浏览器环境');
+}
+// 判断process
+if (typeof process !== 'undefined' && process.versions && process.versions.node) {
+  console.log('Node.js');
+}
+```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-二、如何在 Node.js 中创建一个返回 Hello World 的简单服务器？
+## 二、异步与事件循环
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+## 三、如何在 Node.js 中创建一个返回 Hello World 的简单服务器？
+```js
 const http = require("http");
 http
   .createServer(function (request, response) {
@@ -25,12 +51,15 @@ const server = http.createServer((request, response) => {
 });
 
 server.listen(3000);
+```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-三、Node.js 如何处理CORS 跨域？
-1、原生 Node.js（不依赖框架）
+## 四、Node.js 如何处理CORS 跨域？
 
+### 1、原生 Node.js（不依赖框架） 
+
+```js
 const http = require('http');
 
 const server = http.createServer((req, res) => {
@@ -58,9 +87,10 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(8080);
+```
 
-2、使用 cors 包（推荐）
-
+### 2、使用 cors 包（推荐）
+```js
 const http = require('http');
 const cors = require('cors')();
 
@@ -70,22 +100,26 @@ const server = http.createServer((req, res) => {
     res.end('ok');
   });
 });
+```
 
 
-3、Egg.js 框架
+### 3、Egg.js 框架
 
 Egg.js 没有内置 CORS 插件，需要安装官方插件：
-1）. 安装插件
-npm install egg-cors --save
+1）. 安装插件 
+`npm install egg-cors --save`
 
 2）. 启用插件
+```js
 // config/plugin.js
 exports.cors = {
   enable: true,
   package: 'egg-cors',
 };
+```
 
 3）. 配置跨域规则
+```js
 // config/config.default.js
 exports.cors = {
   // 允许的来源（数组或字符串，* 表示允许所有）
@@ -103,8 +137,10 @@ exports.cors = {
   // 预检请求缓存时间
   maxAge: 86400,
 };
+```
 
 4）. 环境差异化配、
+```js
 // config/config.local.js（本地开发）
 exports.cors = {
   origin: '*',  // 开发环境放宽限制
@@ -116,11 +152,11 @@ exports.cors = {
   origin: 'https://your-frontend.com',
   credentials: true,
 };
-
+```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-四、Node.js 中间件是什么？有哪些用途？
+五、Node.js 中间件是什么？有哪些用途？
 
 Node.js 中间件（Middleware）是一种函数机制，用于在 HTTP 请求到达路由处理程序之前（或响应发送给客户端之前），对请求和响应对象进行加工、拦截或执行某些通用逻辑。基本上是任何不属于业务逻辑的部分。
 一句话：中间件 = 可复用的请求/响应拦截器
@@ -136,7 +172,7 @@ CORS 跨域：设置跨域响应头
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-五、Node.js的异步问题
+六、Node.js的异步问题
 
 1、 回调地狱（Callback Hell）
 嵌套层级深、代码横向膨胀，逻辑难以跟踪：
@@ -168,4 +204,5 @@ async function main() {
     // 统一捕获所有异步错误
   }
 }
+
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
