@@ -178,10 +178,10 @@ Stream（流）是一种用于高效处理流式数据的抽象接口。它的�
 ### Stream 的四种类型
 | 类型 | 描述 | 典型示例 |
 | :--- | :--- | :--- |
-| Readable | 用于读取数据<websource>source_group_web_6</websource>。 | `fs.createReadStream()` (读取文件) |
-| Writable | 用于写入数据<websource>source_group_web_7</websource>。 | `fs.createWriteStream()` (写入文件) |
-| Duplex | 双向流，既可读又可写<websource>source_group_web_8</websource>。 | `net.Socket` (TCP 连接) |
-| Transform | 转换流，在读写过程中可以修改或转换数据<websource>source_group_web_9</websource>。 | `zlib.createGzip()` (数据压缩) |<websource>source_group_web_10</websource>
+| Readable | 用于读取数据 | `fs.createReadStream()` (读取文件) |
+| Writable | 用于写入数据 | `fs.createWriteStream()` (写入文件) |
+| Duplex | 双向流，既可读又可写 | `net.Socket` (TCP 连接) |
+| Transform | 转换流，在读写过程中可以修改或转换数据 | `zlib.createGzip()` (数据压缩) |
 
 ### 如何使用 Stream
 Stream 的使用主要依赖于事件和管道（pipe）机制。  
