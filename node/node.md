@@ -30,6 +30,26 @@ if (typeof process !== 'undefined' && process.versions && process.versions.node)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ## 二、异步与事件循环
+### ‌事件循环（Event Loop）执行顺序‌
+
+- I/O 事件回调
+- setImmediate()
+- 定时器（setTimeout/setInterval）
+- `process.nextTick()（‌优先级最高，在当前操作完成后立即执行‌）‌‌
+
+
+### ‌process.nextTick() vs setImmediate()‌
+`nextTick()`：当前操作结束后、下一次事件循环前执行
+`setImmediate()`：在下一次事件循环的“检查”阶段执行
+```js
+setImmediate(() => console.log('first'));
+process.nextTick(() => console.log('second'));
+console.log('third');
+// 输出：third → second → first ‌‌:ml-citation{ref="5,9" appearance="aggregated" data="citationList"}
+```
+### ‌异步控制方式演进‌
+
+回调函数 → Promise → async/await（ES2017，基于 Promise）‌‌
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
