@@ -30,8 +30,8 @@ type Point = [number, number];
 
 | 特性 | interface | type |
 | :--- | :--- | :--- |
-| 可扩展性 | 支持声明合并 | 不支持 |
-| 支持继承 | 支持 extends | 支持交叉类型 & |
+| 可扩展性 | 支持声明合并，比如：<br />`interface Animal {name: string;}`和`interface Animal { age: number;}`同名会自动合并 | 不支持 |
+| 支持继承 | 支持 extends | 支持交叉类型 &，例如：`type Dog = Animal & { breed: string; };` |
 | 支持基本类型 | ❌	 | ✅（如 `type ID = string`） |
 | 使用场景 | 对象结构建模 | 复杂类型组合 |
 
