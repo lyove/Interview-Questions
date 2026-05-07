@@ -83,34 +83,63 @@ Node.js 的 JavaScript 代码运行在单个主线程上。当遇到耗时的 I/
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-## 二、异步与事件循环
-### ‌事件循环（Event Loop）执行顺序‌
-- I/O 事件回调
-- setImmediate()
-- 定时器（setTimeout/setInterval）
-- `process.nextTick()（‌优先级最高，在当前操作完成后立即执行‌）‌‌
+## 二、EventEmitter做了什么？
+Node.js 的 ‌EventEmitter‌ 是内置模块 events 提供的核心类，用于注册监听器和触发事件。它是一个构造函数，我们需要先创建一个EventEmitter实例，然后才能使用它的方法。
 
+### 核心概念
+- ‌事件（Event）‌：程序中发生的特定动作或状态变化（如“请求到达”、“文件打开”）。
+- ‌监听器（Listener）‌：绑定到事件上的回调函数，事件触发时自动执行。
+- ‌发射器（Emitter）‌：通过 EventEmitter 实例发出事件。
 
-### ‌process.nextTick() vs setImmediate()‌
-`nextTick()`：当前操作结束后、下一次事件循环前执行
-`setImmediate()`：在下一次事件循环的“检查”阶段执行
-```js
-setImmediate(() => console.log('first'));
-process.nextTick(() => console.log('second'));
-console.log('third');
-// 输出：third → second → first
+### 基本使用方法
+1. 引入模块‌
+
+```javascript
+const EventEmitter = require('events');
 ```
-### ‌异步控制方式演进‌
 
-回调函数 → Promise → async/await（ES2017，基于 Promise）‌‌
+2. ‌创建实例‌
+```javascript
+const myEmitter = new EventEmitter();
+```
+
+3. ‌注册监听器‌
+on(event, listener)：持续监听事件。
+once(event, listener)：仅触发一次后自动移除。
+```javascript
+myEmitter.on('greet', (name) => {
+  console.log(`Hello, ${name}!`);
+});
+
+myEmitter.once('init', () => {
+  console.log('Initialized once.');
+});
+```
+
+4. ‌触发事件‌
+```javascript
+myEmitter.emit('greet', 'Alice'); // 输出: Hello, Alice!
+myEmitter.emit('init');           // 输出: Initialized once.
+myEmitter.emit('init');           // 无输出（已自动移除）
+```
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+## 三、Node.js常见陷阱与错误处理
+
+```js
+process.on('uncaughtException', (err) => {
+  console.error('Unhandled error:', err);
+});
+```
+```js
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled rejection:', reason);
+});
+```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-### EventEmitter做了什么？
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-## 三、如何在 Node.js 中创建一个返回 Hello World 的简单服务器？
+## 四、如何在 Node.js 中创建一个返回 Hello World 的简单服务器？
 ```js
 const http = require("http");
 http
@@ -132,7 +161,7 @@ server.listen(3000);
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-## 四、Node.js 如何处理CORS 跨域？
+## 五、Node.js 如何处理CORS 跨域？
 
 ### 1、原生 Node.js（不依赖框架） 
 
@@ -233,7 +262,7 @@ exports.cors = {
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-五、Node.js 中间件是什么？有哪些用途？
+## 六、Node.js 中间件是什么？有哪些用途？
 
 Node.js 中间件（Middleware）是一种函数机制，用于在 HTTP 请求到达路由处理程序之前（或响应发送给客户端之前），对请求和响应对象进行加工、拦截或执行某些通用逻辑。基本上是任何不属于业务逻辑的部分。
 一句话：中间件 = 可复用的请求/响应拦截器
@@ -249,7 +278,7 @@ CORS 跨域：设置跨域响应头
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-六、Node.js的异步问题
+## 七、Node.js的异步问题
 
 1、 回调地狱（Callback Hell）
 嵌套层级深、代码横向膨胀，逻辑难以跟踪：
