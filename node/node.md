@@ -403,11 +403,47 @@ async function main() {
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ### 九、webSocket
-webSocket与传统的http有什么优势 ？  
+webSocket与传统的http有什么优势 ？   
 - 客户端与服务器只需要一个TCP连接，比http长轮询使用更少的连接
 - webSocket服务端可以推送数据到客户端
 - 更轻量的协议头，减少数据传输量
 
+前端 WebSocket 需要服务端支持，以下是常见服务端配置参考：
+
+Nginx 反向代理配置
+```
+location /ws {
+    proxy_pass http://backend_server;
+    proxy_http_version 1.1;
+    
+    # 关键：升级协议
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    
+    # 超时设置
+    proxy_read_timeout 86400;  # 24小时，保持长连接
+}
+```
+
+Node.js (ws 库) 简单示例 
+```js
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', (ws) => {
+  ws.on('message', (message) => {
+    // 广播给所有客户端
+    wss.clients.forEach(client => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
+    });
+  });
+});
+```
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ## Node.js快问快答
