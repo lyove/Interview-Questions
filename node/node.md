@@ -123,6 +123,36 @@ myEmitter.emit('greet', 'Alice'); // 输出: Hello, Alice!
 myEmitter.emit('init');           // 输出: Initialized once.
 myEmitter.emit('init');           // 无输出（已自动移除）
 ```
+
+### 实际应用场景
+1. 自定义事件类
+
+```js
+class MyEmitter extends EventEmitter {}
+const emitter = new MyEmitter();
+emitter.on('custom', () => console.log('Custom event fired!'));
+emitter.emit('custom');
+
+```
+
+2. 模拟异步流程解耦
+```js
+const fs = require('fs');
+const fileEmitter = new EventEmitter();
+
+fs.readFile('data.txt', (err, data) => {
+  if (err) {
+    fileEmitter.emit('error', err);
+  } else {
+    fileEmitter.emit('dataReady', data);
+  }
+});
+
+fileEmitter.on('dataReady', (data) => {
+  console.log('Data loaded:', data.toString());
+});
+
+```
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ## 三、Node.js常见陷阱与错误处理
