@@ -328,7 +328,9 @@ Node.js 中间件（Middleware）是一种函数机制，用于在 HTTP 请求�
 Promise	ES6 标准，| 链式调用，统一错误处理（.catch()）
 async/await	ES2017， | 基于 Promise 的语法糖，写同步风格的异步代码
 util.promisify |	Node.js 内置，将 callback API 包装为 Promise
-fs/promises 等 |	Node.js 官方已提供 Promise 版本的 API，`const fs = require('fs').promises;`
+fs/promises 等 |	Node.js 官方已提供 Promise 版本的 API，
+```js
+const fs = require('fs').promises;`
 
 async function main() {
   try {
@@ -340,6 +342,7 @@ async function main() {
     // 统一捕获所有异步错误
   }
 }
+```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
