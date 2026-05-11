@@ -49,7 +49,7 @@ clearfix 示例：
 * visibility: hidden：元素不可见，但仍占据空间
 
 ## 6. 绝对定位的元素是相对于谁定位的？  
-相对于最近的“已定位”祖先元素（即设置了 position: relative/absolute/fixed 的祖先）。如果没有，则相对 body。
+相对于最近的“已定位”祖先元素（即设置了position: relative/absolute/fixed 的祖先）。如果没有，则相对 body。
 ```css
 .parent {
   position: relative;
