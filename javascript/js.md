@@ -157,7 +157,7 @@ const fakeArray = {
 4. 如何处理伪数组？
 ‌转换为真正的数组‌：使用Array.from()、扩展运算符(...)或者Array.prototype.slice.call()方法。
 ```js
-const trueArray = Array. from(fakeArr);
+const trueArray = Array.from(fakeArr);
 const trueArray2 = [...fakeArr];
 const trueArray3 = Array.prototype.slice.call(fakeArr);
 ```
