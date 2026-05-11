@@ -315,18 +315,22 @@ JS 数据分为两类，拷贝的区别就出在这里：
 
 ## 九、跨域：
 1. 什么是跨域
-    浏览器前端AJAX/fetch 请求时候，协议、域名、端口只要有一个不同，就是跨域。  
-    同源策略目的：防止恶意网站窃取数据/防止CSRF(跨站请求伪造)攻击/保护用户隐私和安全。
+浏览器前端AJAX/fetch 请求时候，协议、域名、端口只要有一个不同，就是跨域。  
+同源策略目的：防止恶意网站窃取数据/防止CSRF(跨站请求伪造)攻击/保护用户隐私和安全。
 
-2. 解决跨域：
-    1）CORS跨域解决方案（后端常用）。在服务器端设置响应头，告诉浏览器允许哪些来源的请求,
-        Access-Control-Allow-Origin: 允许的域名 / * 
-        Access-Control-Allow-Methods: GET,POST,PUT,DELETE 
-        Access-Control-Allow-Headers: 自定义请求头
-    2）代理服务器（Proxy）
-    3）JSONP（JSON with Padding）—— 仅限 GET:一种老旧的跨域解决方案，利用 <script> 标签不受跨域限制的特性
-    4）. WebSocket：const socket = new WebSocket('ws://localhost:8080');
-    5）. postMessage（页面 /iframe 通信）
+2. 解决跨域：  
+  - CORS跨域解决方案（后端常用）。在服务器端设置响应头，告诉浏览器允许哪些来源的请求,
+   Access-Control-Allow-Origin: 允许的域名 / * 
+   Access-Control-Allow-Methods: GET,POST,PUT,DELETE 
+   Access-Control-Allow-Headers: 自定义请求头  
+
+  - 代理服务器（Proxy） 
+
+  - JSONP（JSON with Padding）—— 仅限 GET:一种老旧的跨域解决方案，利用 `<script>` 标签不受跨域限制的特性  
+
+  - WebSocket：`const socket = new WebSocket('ws://localhost:8080'); ` 
+
+  - postMessage（页面 /iframe 通信）. 
 
 ----------------------
 
