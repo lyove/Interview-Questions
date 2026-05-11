@@ -319,53 +319,55 @@ JS 数据分为两类，拷贝的区别就出在这里：
     同源策略目的：防止恶意网站窃取数据/防止CSRF(跨站请求伪造)攻击/保护用户隐私和安全。
 
 2. 解决跨域：
-    1）.CORS跨域解决方案（后端常用）。在服务器端设置响应头，告诉浏览器允许哪些来源的请求,
+    1）CORS跨域解决方案（后端常用）。在服务器端设置响应头，告诉浏览器允许哪些来源的请求,
         Access-Control-Allow-Origin: 允许的域名 / * 
         Access-Control-Allow-Methods: GET,POST,PUT,DELETE 
         Access-Control-Allow-Headers: 自定义请求头
-    2）. 代理服务器（Proxy）
-    3）. JSONP（JSON with Padding）—— 仅限 GET:一种老旧的跨域解决方案，利用 <script> 标签不受跨域限制的特性
+    2）代理服务器（Proxy）
+    3）JSONP（JSON with Padding）—— 仅限 GET:一种老旧的跨域解决方案，利用 <script> 标签不受跨域限制的特性
     4）. WebSocket：const socket = new WebSocket('ws://localhost:8080');
     5）. postMessage（页面 /iframe 通信）
 
 ----------------------
 
-## 十、Cookies
-1. 设置 Cookie
+## 十、Cookies 
+1. 设置 Cookie  
 ```js
 // 基础格式：document.cookie = "键=值; 过期时间; 路径;" 
 document.cookie = "username=张三; max-age=86400; path=/"; 
 // max-age=86400 = 1天（单位：秒）
 ```
 
-2. 获取 Cookie (所有cookie)
+2. 获取 Cookie (所有cookie)  
 ```js
 // 获取到的是字符串，格式："username=张三; age=20"
 const allCookies = document.cookie; 
 console.log(allCookies);
 ```
 
-3. 修改 Cookie
+3. 修改 Cookie  
 直接覆盖同名cookie即可
 
-4. 删除 Cookies：
+4. 删除 Cookies：  
 只能通过设置过期时间为过去来“删除”：把 max-age 设为 0 或负数
 
 ----------------------
 
-## 十一、localStorage、sessionStorage
+## 十一、localStorage、sessionStorage  
 * localStorage：持久化存储｜同源共享｜手动删才没；
 * sessionStorage：会话级存储｜仅在同一个浏览器标签页内有效｜窗口或标签页关闭就清空；
 
 两个存储的用法完全相同，只有生命周期不同！
-* storage.setItem('key', 'value');
-* const value = storage.getItem('key');
-* storage.removeItem('key');
-* storage.clear();
+```js
+ storage.setItem('key', 'value');
+ const value = storage.getItem('key');
+ storage.removeItem('key');
+ storage.clear();
+```
 
 ----------------------
 
-## 十二、防抖、节流
+## 十二、防抖、节流  
 ### 防抖 
 连续触发只执行最后一次；  
 **场景**：搜索框输入/窗口调整/按钮多次提交/滚动事件。
@@ -404,3 +406,20 @@ function throttle(fn, delay) {
     }; 
 }
 ```
+
+## 十三、JavaScript 数组核心方法
+
+| 方法分类 | 方法名 | 是否修改原数组 | 核心作用 |
+| :--- | :--- | :--- | :--- |
+| 增删改 | `push`, `pop`, `shift`, `unshift` | ✅ 是 | 在数组头/尾添加或删除元素 |
+| | `splice` | ✅ 是 | 万能方法：删除、插入、替换元素 |
+| 查找访问 | `indexOf`, `includes` | ❌ 否 | 查找元素索引或判断是否存在 |
+| | `find`, `findIndex` | ❌ 否 | 查找符合条件的第一个元素或索引 |
+| | `at` | ❌ 否 | 支持负数索引访问（如 `arr.at(-1)`） |
+| 遍历转换 | `forEach` | ❌ 否 | 遍历数组，无返回值 |
+| | `map` | ❌ 否 | 映射新数组，常用于数据格式转换 |
+| | `filter` | ❌ 否 | 筛选符合条件的新数组 |
+| | `reduce` | ❌ 否 | 累加/聚合，将数组计算为单个值 |
+| 排序处理 | `sort`, `reverse` | ✅ 是 | 排序（注意默认按字符串排序）和反转 |
+| | `slice` | ❌ 否 | 截取数组片段（浅拷贝） |
+
