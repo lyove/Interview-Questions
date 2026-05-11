@@ -1,7 +1,7 @@
 # JavaScript
 
 ## 一、ES6新特性
-* Let  const 
+* Let、const 
 * 箭头函数
 * 解构赋值
 * 模板字符串
