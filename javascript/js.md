@@ -415,15 +415,15 @@ function throttle(fn, delay) {
 
 | 方法分类 | 方法名 | 是否修改原数组 | 核心作用 |
 | :--- | :--- | :--- | :--- |
-| 增删改 | `push`, `pop`, `shift`, `unshift` | ✅ 是 | 在数组头/尾添加或删除元素 |
-| | `splice` | ✅ 是 | 万能方法：删除、插入、替换元素 |
+| 增删改 | `push(item)`, `pop`, `shift`, `unshift` | ✅ 是 | `push(item)`:在末尾添加元素，返回新长度；`pop()`:删除末尾元素，返回被删除的元素；`shift()`:删除开头元素，返回被删除的元素；`unshift()`:在开头添加元素，返回新长度； |
+| | `splice` | ✅ 是 | 万能方法：删除、插入、替换元素。<br />语法：`arr.splice(start, deleteCount, newItem1, ...)`<br />删除：`arr.splice(1, 1)` (从索引1开始删除1个)<br />插入：`arr.splice(1, 0, 'new')` (从索引1开始删除0个，插入'new')<br /> 替换：`arr.splice(1, 1, 'new')` (删除1个并插入'new') |
 | 查找访问 | `indexOf`, `includes` | ❌ 否 | 查找元素索引或判断是否存在 |
 | | `find`, `findIndex` | ❌ 否 | 查找符合条件的第一个元素或索引 |
-| | `at` | ❌ 否 | 支持负数索引访问（如 `arr.at(-1)`） |
-| 遍历转换 | `forEach` | ❌ 否 | 遍历数组，无返回值 |
-| | `map` | ❌ 否 | 映射新数组，常用于数据格式转换 |
-| | `filter` | ❌ 否 | 筛选符合条件的新数组 |
-| | `reduce` | ❌ 否 | 累加/聚合，将数组计算为单个值 |
+| | `at(index)` | ❌ 否 | `arr.at(index)`:它允许你通过索引来访问数组元素，类似于传统的 `arr[index]` 语法，比 `arr[arr.length-1]` 更简洁）。 |
+| 遍历转换 | `forEach()` | ❌ 否 | 遍历数组，无返回值 |
+| | `map()` | ❌ 否 | 映射新数组，常用于数据格式转换 |
+| | `filter()` | ❌ 否 | 筛选符合条件的新数组 |
+| | `reduc()` | ❌ 否 | 累加/聚合，将数组“压缩”成一个值（如求和、统计）。`const sum = [1,2,3].reduce((acc, cur) => acc + cur, 0);` |
 | 排序处理 | `sort`, `reverse` | ✅ 是 | 排序（注意默认按字符串排序）和反转 |
-| | `slice` | ❌ 否 | 截取数组片段（浅拷贝） |
+| | `slice` | ❌ 否 | 截取数组片段（浅拷贝）`arr.slice([start[, end]])` |
 
