@@ -292,3 +292,9 @@ function process(value: unknown) {
 ## 八、any和unknown的区别？
 `any`：绕过所有类型检查。
 `unknown`：必须先做类型检查后才能操作。
+
+## readonly
+```jsx
+const person: { readonly name: string } = { name: "Alice" };
+person.name = "Bob"; // ❌ 报错：无法分配到只读属性
+```
