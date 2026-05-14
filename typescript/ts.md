@@ -70,6 +70,46 @@ function identity<T>(arg: T): T {
 }
 ```
 
+2. 泛型接口
+当接口的某些属性或方法需要支持多种类型时，可以使用泛型接口。  
+```jsx
+interface ApiResponse<T> {
+  code: number;
+  message: string;
+  data: T; // data 的类型由外部传入
+}
+
+const userRes: ApiResponse<{ id: number; name: string }> = {
+  code: 200,
+  message: "成功",
+  data: { id: 1, name: "张三" }
+};
+```
+
+3. 泛型类
+泛型类可以确保类的实例方法在处理不同类型时保持类型一致。  
+```jsx
+class Box<T> {
+  private content: T;
+  constructor(initial: T) {
+    this.content = initial;
+  }
+  get(): T {
+    return this.content;
+  }
+}
+
+const numberBox = new Box<number>(100);
+// numberBox.set("hello"); // 报错！这里只能传入 number
+```
+
+4. 泛型类型别名
+常用于定义一些通用的数据结构，比如树形结构或包装类型。  
+```jsx
+type Wrapped<T> = { value: T };
+const wrappedNum: Wrapped<number> = { value: 42 };
+```
+
 
 ## 四、什么是类型断言？如何使用？
 使用「尖括号」`<类型>` 或 as `as 类型`。
