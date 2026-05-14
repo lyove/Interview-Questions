@@ -39,7 +39,39 @@ type Point = [number, number];
 ## 二、如何表示联合类型：
 使用 | 表示联合类型
 
-## 三、什么是类型断言？如何使用？
+## 三、泛型
+简单来说，泛型就像是“类型的变量”或“类型占位符”。它允许你在编写函数、接口或类时，不预先指定具体的类型，而是在使用时再确定类型。  
+例如：
+```jsx
+// T 是一个类型变量，代表调用时传入的具体类型
+function getFirst<T>(arr: T[]): T {
+  return arr[0];
+}
+
+const num = getFirst([1, 2, 3]); // TypeScript 自动推断 T 为 number，返回值也是 number
+const str = getFirst(['a', 'b']); // 自动推断 T 为 string，返回值也是 string
+```
+### 🛠️ 泛型的四大核心应用场景
+1. 泛型函数
+在函数名后使用 <T> 定义类型参数，它可以在参数、返回值或函数内部使用。
+```jsx
+function identity<T>(arg: T): T {
+  return arg;
+}
+let output = identity<string>("hello"); // 显式指定 T 为 string
+let output2 = identity(100); // 自动推断 T 为 number
+```
+具体含义  
+```jsx
+function identity<T>(arg: T): T {
+//           ^^^^    ^^^    ^
+//           声明    使用    使用
+  return arg;
+}
+```
+
+
+## 四、什么是类型断言？如何使用？
 使用「尖括号」`<类型>` 或 as `as 类型`。
 TypeScript 类型断言（Type Assertion）是一种告诉编译器"我知道这个值的具体类型，请相信我"的机制。它不会进行任何运行时转换，仅在编译时移除类型检查。
 

@@ -191,7 +191,7 @@ for (let i = 0; i < items.length; i++) {
 3、对象数组去重
 ```js
 	const uniqueById = arr.filter((item, index, self) => 
- 		 index === self.findIndex(t => t.id === item.id)
+ 		index === self.findIndex(t => t.id === item.id)
 	);
 ```
 
