@@ -147,8 +147,8 @@ const canvas = document.querySelector("canvas") as HTMLCanvasElement;
 3. 处理联合类型
 ```ts
 type Shape = 
-  | { kind: "circle"; radius: number }
-  | { kind: "square"; side: number };
+  |{ kind: "circle"; radius: number }
+  |{ kind: "square"; side: number };
 
 function getArea(shape: Shape) {
   if (shape.kind === "circle") {
