@@ -185,14 +185,14 @@ dog.bark(); // 运行时错误！cat 没有 bark 方法
 ```
 
 
-## 四、元组（Tuple）的作用是什么？如何定义？
+## 五、元组（Tuple）的作用是什么？如何定义？
 `let user: [string, number];`
 
-## 五、类型推断？
+## 六、类型推断？
 TypeScript 会根据赋值自动推断类型
 
 
-## 六、类型守卫
+## 七、类型守卫
 TypeScript 类型守卫（Type Guard）是一种在运行时检查值的类型，并据此在代码块内收窄（Narrow）类型范围的机制。与类型断言"强制告诉编译器"不同，类型守卫是让编译器根据逻辑自动推断出更精确的类型。
 示例：
 ```ts
@@ -289,6 +289,6 @@ function process(value: unknown) {
 }
 ```
 
-## 七、any和unknown的区别？
+## 八、any和unknown的区别？
 `any`：绕过所有类型检查。
 `unknown`：必须先做类型检查后才能操作。
