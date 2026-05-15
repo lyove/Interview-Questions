@@ -174,23 +174,59 @@ flex-basis：定义在分配多余空间之前，项目占据的主轴空间。
 flex：简写属性，相当于flex-grow, flex-shrink 和 flex-basis 的合并。
 align-self：允许单个项目覆盖容器的align-items属性。
 
-## 22.  CSS选择器优先级
+## 22. css 实现左侧固定宽度，右侧自适应
+**方法1：使用Flexbox**
+```css
+.container {
+  display: flex;
+}
+
+.left-sidebar {
+  width: 200px; /* 固定宽度 */
+  background-color: lightblue; /* 仅为了区分 */
+}
+
+.main-content {
+  flex-grow: 1; /* 自适应剩余空间 */
+  background-color: lightcoral; /* 仅为了区分 */
+}
+
+```
+
+**方法2：使用Grid布局**
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 200px 1fr; /* 200px是左侧的固定宽度，1fr表示右侧自适应 */
+}
+
+.left-sidebar {
+  background-color: lightblue; /* 仅为了区分 */
+}
+
+.main-content {
+  background-color: lightcoral; /* 仅为了区分 */
+}
+
+```
+
+## 23.  CSS选择器优先级
 权重排序‌：!important > 行内样式 > ID 选择器 > 类选择器 > 标签选择器 > 通配符。
 
-## 23. 请解释CSS contain 属性的作用和可用值。
+## 24. 请解释CSS contain 属性的作用和可用值。
 
 
-## 24. 请解释CSS clip-path 属性的作用及其实现形状裁剪的方法。 
+## 25. 请解释CSS clip-path 属性的作用及其实现形状裁剪的方法。 
 
 
-## 25. 请解释什么是CSS Grid布局，并描述其关键特性与优势。
+## 26. 请解释什么是CSS Grid布局，并描述其关键特性与优势。
 
-## 26、伪类与伪元素区别‌
+## 27、伪类与伪元素区别‌
 伪类用单冒号（:hover），伪元素用双冒号（::before），
 伪类不改变 DOM 内容，伪元素创建虚拟容器。
 
 
-## 27、进阶知识点
+## 28、进阶知识点
 * ‌响应式布局‌
     * ‌rem 与 em 区别‌：rem 相对根元素 html 字体大小，em 相对父元素字体大小。
     * ‌vw/vh 单位‌：vw 为视窗宽度 1/100，vh 为视窗高度 1/100，可克服 rem 的"阶梯性"弊端。
